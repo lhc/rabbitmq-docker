@@ -4,8 +4,14 @@ services:
   rabbitmq:
     image: rabbitmq:3.13-management
     restart: unless-stopped
+    environment:
+      - RABBITMQ_MQTT_USER=${RABBITMQ_MQTT_USER}
+      - RABBITMQ_MQTT_PASSWORD=${RABBITMQ_MQTT_PASSWORD}
+      - RABBITMQ_ADMIN_USER=${RABBITMQ_ADMIN_USER}
+      - RABBITMQ_ADMIN_PASSWORD=${RABBITMQ_ADMIN_PASSWORD}
     volumes:
        - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+       - "./config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf"
     ports:
       - 5672:5672
       - 15672:15672
