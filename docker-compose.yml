@@ -7,14 +7,11 @@ services:
     volumes:
       - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
       - ./config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-      - ./config/definitions.json:/etc/rabbitmq/definitions.json
     ports:
       - "5672:5672"   # AMQP
       - "15672:15672" # Management UI
       - "8883:8883"   # MQTT
     environment:
-      - RABBITMQ_MQTT_USER=${RABBITMQ_MQTT_USER}
-      - RABBITMQ_MQTT_PASSWORD=${RABBITMQ_MQTT_PASSWORD}
-      - RABBITMQ_ADMIN_USER=${RABBITMQ_ADMIN_USER}
-      - RABBITMQ_ADMIN_PASSWORD=${RABBITMQ_ADMIN_PASSWORD}
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_ADMIN_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_ADMIN_PASSWORD}
     #command: "/bin/bash -c \"rabbitmq-plugins enable rabbitmq_mqtt\""
